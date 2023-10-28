@@ -17,6 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from compte.views import login_user, signup,logout_user
+from vote.views import home, election, new_election
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('connection', login_user, name='login'),
+    path('inscription', signup, name='signup'),
+    path('deconnection', logout_user, name='logout'),
+    path('', home, name='home'),
+    path('elections', election, name='election'),
+    path('elections/new', new_election, name='new_election'),
 ]

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <title>Election App</title>
+    </head>
+    <body>
+        <div>
+            <h1>Election App</h1>
+            <h3>{{request.user}}</h3>
+            <a href="{% url 'logout' %}">Deconnection</a>
+            <a href="{% url 'new_election' %}">Nouvel Election</a>
+        </div>
+        <div>
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </body>
+</html>

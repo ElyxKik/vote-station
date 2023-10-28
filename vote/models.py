@@ -4,6 +4,7 @@ from django.db.models.deletion import CASCADE
 from compte.models import User
 
 
+
 class Election(models.Model):
 
     class SystemeVote(models.TextChoices):
@@ -39,8 +40,8 @@ class Candidat(models.Model):
     nom = models.CharField(max_length=50)
     post_nom = models.CharField(max_length=50)
     numero = models.PositiveIntegerField(default=0)
-    photo = models.ImageField(
-        verbose_name='photo de profil', upload_to='photo_candidat', blank=True)
+    #photo = models.ImageField(
+    #    verbose_name='photo de profil', upload_to='photo_candidat', blank=True)
     key = models.CharField(max_length=50)
     telephone = models.PositiveIntegerField()
     email = models.EmailField()
@@ -54,14 +55,14 @@ class Electeur(models.Model):
     date = models.DateTimeField(auto_now=True)
 
 
-class VoteScrutin(models.Model):
+class VoixVoteScrutin(models.Model):
     candidat = models.ForeignKey(Candidat, on_delete=CASCADE, null=True, blank=True)
     electeur = models.ForeignKey(Electeur, on_delete=CASCADE)
     key = models.CharField(max_length=50)
     date = models.DateTimeField(auto_now=True)
 
 
-class VoteSimple(models.Model):
+class VoixVoteSimple(models.Model):
     vote_simple = models.ForeignKey(VoteSimple, on_delete=CASCADE)
     electeur = models.ForeignKey(Electeur, on_delete=CASCADE)
     vote = models.BooleanField(null=True)

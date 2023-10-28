@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Connection</title>
+    </head>
+
+    <body>
+        <div>
+            {{message}}
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Se connecter</button>
+            </form>
+        </div>
+    </body>
