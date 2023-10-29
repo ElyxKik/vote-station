@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-2xl mx-auto">
+    <div class="flex flex-row justify-between my-4">
+        <button data-modal-target="modal" data-modal-toggle="modal" class="bg-blue-500 py-2 px-4 text-xs rounded-lg text-white hover:bg-blue-600 shadow">+ Scrutin de liste</button>
+        <button data-modal-target="modal2" data-modal-toggle="modal2"><a href="#"  class="bg-blue-500 py-2 px-4 text-xs text-sm rounded-lg text-white hover:bg-blue-600 shadow">+ Vote simple</a></button>
+  
+        <!-- Main modal -->
+        <div id="modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative w-full max-w-md max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <!-- Modal header -->
+                    <div class="px-6 py-4 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-base font-semibold text-gray-900 lg:text-xl dark:text-white">
+                            Créer un scrutin de liste
+                        </h3>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-6">
+                        <form class="space-y-2" method="post" action="{% url 'new_scrutin_liste' election.id %}">
+                            {% csrf_token %}
+                            <div>
+                                <label for="scrutin" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titre </label>
+                                <input type="text" name="scrutin" id="scrutin" name="scrutin" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="President" required>
+                            </div>
+                            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                            <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="description" placeholder="Decrivez ce scrutin de liste..."></textarea>
+                            <button type="submit" class="bg-blue-500 py-2 px-4 text-xs text-sm rounded-lg text-white hover:bg-blue-600 shadow">Créer</button>
+                        </form>
+                        <div>
+                            <a href="#" class="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400">
+                                <svg class="w-3 h-3 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                </svg>
+                                Par exemple: President, vice-president</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+            <!-- Main modal -->
+            <div id="modal2" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative w-full max-w-md max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="modal2">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <!-- Modal header -->
+                    <div class="px-6 py-4 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-base font-semibold text-gray-900 lg:text-xl dark:text-white">
+                            Créer un vote simple
+                        </h3>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-6">
+                        <form class="space-y-2" method="post" action="{% url 'new_vote_simple' election.id%}">
+                            {% csrf_token %}
+                            <div>
+                                <label for="titre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titre </label>
+                                <input type="text" name="titre" id="titre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Loi de la protection des animaux dommestique" required>
+                            </div>
+                            
+                            <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                            <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" name="description" placeholder="Expliquez de quoi il s'agit..."></textarea>
+                            <button type="submit" class="bg-blue-500 py-2 px-4 text-xs text-sm rounded-lg text-white hover:bg-blue-600 shadow">Créer</button>
+                        </form>
+                        <div class="my-2">
+                            <a href="#" class="inline-flex items-center text-xs font-normal text-gray-500 hover:underline dark:text-gray-400">
+                                <svg class="w-3 h-3 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                                </svg>
+                                Par exemple: President, vice-president</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+    </div>
+<div class="bg-white p-4 rounded-lg shadow">
+    <div class="flex flex-col">
+        <span class="bg-red-500 h-36"></span>
+        <div class="p-2 text-sm">
+            <h6 class="font-semibold text-lg"><a href="{% url 'election_detail' election.id %}">{{election.titre}}</a></h6>
+            <p class="flex flex-row space-x-2 items-center">
+                <span>
+                    <svg class="w-3.5 h-3.5 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.333 6.764a3 3 0 1 1 3.141-5.023M2.5 16H1v-2a4 4 0 0 1 4-4m7.379-8.121a3 3 0 1 1 2.976 5M15 10a4 4 0 0 1 4 4v2h-1.761M13 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-4 6h2a4 4 0 0 1 4 4v2H5v-2a4 4 0 0 1 4-4Z"/>
+                      </svg>
+                </span>
+                <span class="text-gray-600">Par {{election.groupe}}</span>
+            </p>
+            <p class="flex flex-row space-x-2 items-center">
+                <span>
+                    {% if election.systeme_de_vote == "Vote non anonyme"%}
+                    <svg class="w-3.5 h-3.5 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 16.5c0-1-8-2.7-9-2V1.8c1-1 9 .707 9 1.706M10 16.5V3.506M10 16.5c0-1 8-2.7 9-2V1.8c-1-1-9 .707-9 1.706"/>
+                    </svg>
+                    {% else %}
+                    <svg class="w-3.5 h-3.5 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.5 8V4.5a3.5 3.5 0 1 0-7 0V8M8 12v3M2 8h12a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/>
+                      </svg>
+                    {% endif %}
+                </span>
+                <span class="text-gray-600">{{election.systeme_de_vote}}</span>
+        </p>
+        <p class="flex flex-row space-x-2 items-center">
+            <span>
+                <svg class="w-3.5 h-3.5 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M10 6v4l3.276 3.276M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                  </svg>
+            </span>
+            <span class="text-gray-600">{{election.debut_election}} - {{election.fin_election}}</span>
+        </p>
+        <p class="text-right text-sm text-gray-500 my-2">{{election.date|date}} à {{e.date|time}}</p>
+        </div>
+    </div>
+    <div>
+        <h5 class="font-semibold my-2">Liste</h5>
+        <div class="border border-gray-200 rounded-lg divide divide-y-2">
+            {% for s in scrutin reversed %}
+                <div class="p-2 text-sm"><a href="{% url 'scrutin_liste_detail' s.id %}">{{s.titre_du_scrutin}}</a></div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

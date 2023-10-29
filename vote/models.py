@@ -25,6 +25,8 @@ class Election(models.Model):
 class ScrutinList(models.Model):
     titre_du_scrutin = models.CharField(max_length=100)
     election = models.ForeignKey(Election, on_delete=CASCADE)
+    description = models.TextField(blank=True)
+    gagnant = models.CharField(max_length=200, blank=True)
 
 
 class VoteSimple(models.Model):
@@ -38,10 +40,10 @@ class Candidat(models.Model):
     list_candidat = models.ForeignKey(ScrutinList, on_delete=CASCADE)
     prenom = models.CharField(max_length=50)
     nom = models.CharField(max_length=50)
-    post_nom = models.CharField(max_length=50)
+    post_nom = models.CharField(max_length=50, blank=True)
     numero = models.PositiveIntegerField(default=0)
-    #photo = models.ImageField(
-    #    verbose_name='photo de profil', upload_to='photo_candidat', blank=True)
+    photo = models.ImageField(
+        verbose_name='photo de profil', upload_to='photo_candidat', blank=True)
     key = models.CharField(max_length=50)
     telephone = models.PositiveIntegerField()
     email = models.EmailField()

@@ -1,4 +1,81 @@
 {% extends "base.html" %}
 {% block content %}
-    <p>Page d'accueil</p>
+<div class="py-4">
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+        <div class="flex flex-col bg-white p-4 rounded-lg text-right">
+            <span class="font-bold text-xl">0</span>
+            <span class="text-sm">Election</span>
+        </div>
+        <div class="flex flex-col bg-white p-4 rounded-lg text-right">
+            <span class="font-bold text-xl">0</span>
+            <span class="text-sm">Candidat</span>
+        </div>
+        <div class="flex flex-col bg-white p-4 rounded-lg text-right">
+            <span class="font-bold text-xl">0</span>
+            <span class="text-sm">Electeur</span>
+        </div>
+    </div>
+    <div class="my-8">
+        <h3 class="font-semibold text-lg  my-4">Election en cours</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+            <div class="bg-white rounded-lg flex flex-col">
+                <span class="bg-red-500 h-28"></span>
+                <div class="p-2 text-sm">
+                    <h6 class="font-semibold">TItre de l'election</h6>
+                    <p>Type</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg flex flex-col">
+                <span class="bg-green-500 h-28"></span>
+                <div class="p-2 text-sm">
+                    <h6 class="font-semibold">TItre de l'election</h6>
+                    <p>Type</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg flex flex-col">
+                <span class="bg-yellow-500 h-28"></span>
+                <div class="p-2 text-sm">
+                    <h6 class="font-semibold">TItre de l'election</h6>
+                    <p>Type</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg flex flex-col">
+                <span class="bg-blue-500 h-28"></span>
+                <div class="p-2 text-sm">
+                    <h6 class="font-semibold">TItre de l'election</h6>
+                    <p>Type</p>
+                </div>
+            </div>
+        </div>
+        <div class="my-8">
+            <h3 class="font-semibold text-lg  my-4">Dernieres victoires scrutin de liste</h3>
+            <div class="grid grid-cols-6">
+                <div class="flex flex-col">
+                    <span class="bg-blue-500 h-28 w-28 rounded-full"></span>
+                    <div class="p-2 text-sm">
+                        <h6 class="font-semibold">Paul Makabu</h6>
+                        <p>Vainceur avec 65%</p>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="bg-gray-500 h-28 w-28 rounded-full"></span>
+                    <div class="p-2 text-sm">
+                        <h6 class="font-semibold">André bamiana</h6>
+                        <p>Vainceur avec 55%</p>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="bg-green-500 h-28 w-28 rounded-full"></span>
+                    <div class="p-2 text-sm">
+                        <h6 class="font-semibold">Timothé epwala</h6>
+                        <p>Vainceur avec 71%</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock content %}

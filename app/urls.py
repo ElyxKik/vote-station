@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 
 from compte.views import login_user, signup,logout_user
-from vote.views import home, election, new_election
+from vote.views import *
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +29,12 @@ urlpatterns = [
     path('inscription', signup, name='signup'),
     path('deconnection', logout_user, name='logout'),
     path('', home, name='home'),
-    path('elections', election, name='election'),
-    path('elections/new', new_election, name='new_election'),
-]
+    path('election/all', election, name='election'),
+    path('election/new', new_election, name='new_election'),
+    path('election/<int:id>', election_detail, name='election_detail'),
+    path('scrutin-de-liste/new/<int:id>', new_scrutin_liste, name='new_scrutin_liste'),
+    path('scrutin-de-liste/<int:id>', scrutin_liste_detail, name='scrutin_liste_detail'),
+    path('candidat/new/<int:id>', new_candidat, name='new_candidat'),
+    path('vote-simple/<int:id>', vote_simple_detail, name='vote_simple_detail'),
+    path('vote-simple/new/<int:id>', new_vote_simple, name='new_vote_simple')
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
