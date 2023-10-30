@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
 <div class="py-4">
     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
         <div class="flex flex-col bg-white p-4 rounded-lg text-right">
@@ -15,67 +16,41 @@
             <span class="text-sm">Electeur</span>
         </div>
     </div>
+    <p>Bonjour, {{request.user}}
     <div class="my-8">
         <h3 class="font-semibold text-lg  my-4">Election en cours</h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
+            {% for e in elections reversed %}
             <div class="bg-white rounded-lg flex flex-col">
-                <span class="bg-red-500 h-28"></span>
+                <img src="{% static 'image-scrutin.jpg' %}" class="h-40" />
                 <div class="p-2 text-sm">
-                    <h6 class="font-semibold">TItre de l'election</h6>
-                    <p>Type</p>
+                    <h6 class="font-semibold text-base"><a href="{% url 'election_detail' e.id %}">{{e.titre}}</a></h6>
+                    <p class="flex flex-row space-x-2 items-center mt-2 text-sm">
+                        <span>
+                            <svg class="w-3.5 h-3.5 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.333 6.764a3 3 0 1 1 3.141-5.023M2.5 16H1v-2a4 4 0 0 1 4-4m7.379-8.121a3 3 0 1 1 2.976 5M15 10a4 4 0 0 1 4 4v2h-1.761M13 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm-4 6h2a4 4 0 0 1 4 4v2H5v-2a4 4 0 0 1 4-4Z"/>
+                              </svg>
+                        </span>
+                        <span class="text-gray-600">Par {{e.groupe}}</span>
+                        </p>
+                        <p class="flex flex-row space-x-2 items-center">
+                        <span >
+                            {% if e.systeme_de_vote == "Vote non anonyme"%}
+                            <svg class="w-3.5 h-3.5 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 18">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 16.5c0-1-8-2.7-9-2V1.8c1-1 9 .707 9 1.706M10 16.5V3.506M10 16.5c0-1 8-2.7 9-2V1.8c-1-1-9 .707-9 1.706"/>
+                            </svg>
+                            {% else %}
+                            <svg class="w-3.5 h-3.5 text-gray-500 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.5 8V4.5a3.5 3.5 0 1 0-7 0V8M8 12v3M2 8h12a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/>
+                              </svg>
+                            {% endif %}
+                        </span>
+                        <span class="text-gray-600">{{e.systeme_de_vote}}</span>
+                    </p>
+                    <p class="text-right text-xs text-gray-400 my-2">{{e.date|date}} à {{e.date|time}}</p>
                 </div>
             </div>
-
-            <div class="bg-white rounded-lg flex flex-col">
-                <span class="bg-green-500 h-28"></span>
-                <div class="p-2 text-sm">
-                    <h6 class="font-semibold">TItre de l'election</h6>
-                    <p>Type</p>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg flex flex-col">
-                <span class="bg-yellow-500 h-28"></span>
-                <div class="p-2 text-sm">
-                    <h6 class="font-semibold">TItre de l'election</h6>
-                    <p>Type</p>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg flex flex-col">
-                <span class="bg-blue-500 h-28"></span>
-                <div class="p-2 text-sm">
-                    <h6 class="font-semibold">TItre de l'election</h6>
-                    <p>Type</p>
-                </div>
-            </div>
-        </div>
-        <div class="my-8">
-            <h3 class="font-semibold text-lg  my-4">Dernieres victoires scrutin de liste</h3>
-            <div class="grid grid-cols-6">
-                <div class="flex flex-col">
-                    <span class="bg-blue-500 h-28 w-28 rounded-full"></span>
-                    <div class="p-2 text-sm">
-                        <h6 class="font-semibold">Paul Makabu</h6>
-                        <p>Vainceur avec 65%</p>
-                    </div>
-                </div>
-                <div class="flex flex-col">
-                    <span class="bg-gray-500 h-28 w-28 rounded-full"></span>
-                    <div class="p-2 text-sm">
-                        <h6 class="font-semibold">André bamiana</h6>
-                        <p>Vainceur avec 55%</p>
-                    </div>
-                </div>
-                <div class="flex flex-col">
-                    <span class="bg-green-500 h-28 w-28 rounded-full"></span>
-                    <div class="p-2 text-sm">
-                        <h6 class="font-semibold">Timothé epwala</h6>
-                        <p>Vainceur avec 71%</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+            {% endfor %}
     </div>
 </div>
 {% endblock content %}

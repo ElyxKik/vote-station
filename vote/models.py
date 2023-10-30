@@ -51,6 +51,7 @@ class Candidat(models.Model):
 
 
 class Electeur(models.Model):
+    user = models.ForeignKey(User, on_delete=CASCADE)
     prenom = models.CharField(max_length=50)
     nom = models.CharField(max_length=50)
     post_nom = models.CharField(max_length=50)

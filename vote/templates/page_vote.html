@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div>
+    <h1 class="text-2xl font-bold my-2">Bulletin de vote</h1>
+    <ul class="flex flex-col">
+        <form method="post" action="{% url 'page_vote' election.id  %}">
+            {% csrf_token %}
+            <div class="">
+                {% for l in liste_non_vide %}
+                <div class="my-10">
+                    <h3 class="font-semibold text-lg my-2">{{ l.titre_du_scrutin }}</h3>
+                    <div class="grid grid-cols-6 gap-2">
+                        {% for candidat in l.candidat_set.all %}
+                            <div class="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
+                                <input id="bordered-radio-1" type="radio" value="{{candidat.id}}" name="candidat" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <div class="flex flex-col items-center space-x-2">
+                                    <img src="{{candidat.photo.url}}" class="h-24" />
+                                    <label for="bordered-radio-1" class="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">{{ candidat.prenom }} {{ candidat.nom }}</label>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <li>Aucun candidat</li>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="bg-blue-500 py-2 px-4 text-xs text-sm rounded-lg text-white hover:bg-blue-600 shadow">Voter</button>
+                </div>
+                {% empty %}
+                    <li>Aucune liste pour le moment</li>
+                {% endfor %}
+            </div>
+        </form>
+    </ul>
+</div>
+
+{% endblock content %}

@@ -31,7 +31,7 @@
                             </div>
                             <div>
                                 <label for="post_nom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Post-Nom</label>
-                                <input type="text" name="post_nom" id="post_nom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Entrer le post-nom" required>
+                                <input type="text" name="post_nom" id="post_nom" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Entrer le post-nom">
                             </div>
                             <div>
                                 <label for="prenom" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Prenom</label>
@@ -59,14 +59,12 @@
 
 <div class="bg-white p-4 rounded-lg shadow">
     <h3 class="font-semibold text-lg  my-4">Candidats {{scrutin.titre_du_scrutin}}</h3>
-    <div class="grid grid-cols-4 gap-2">
+    <div class="grid grid-cols-4 gap-2 my-8">
         {% for c in candidats %}
-        <div class="flex flex-col space-y-2 border border-gray-200 rounded-lg">
-            <div class="absolute left-5 bg-gray-500 rounded-full p-2">{{ c.numero }}</div>
-            <img src="{{ c.photo.url }}" class="h-52"/>
-
+        <div class="flex flex-col space-y-2 border border-gray-200 rounded-lg shadow-sm">
+            <img src="{{ c.photo.url }}" class="h-52 rounded-t-lg"/>
             <div class="p-2 text-sm ">
-            <p class="font-semibold">{{c.nom}} {{c.post_nom}} {{c.prenom}}</p>
+            <p class="font-semibold text-base"><a href="{% url 'candidat_detail' c.id %}">{{c.nom}} {{c.post_nom}} {{c.prenom}}</a></p>
             <p>Numero : <span class="font-">{{ c.numero }}</span></p>
             </div>
         </div>

@@ -2,9 +2,13 @@
 {% block content %}
 <div class="max-w-2xl mx-auto">
     <div class="flex flex-row justify-between my-4">
-        <button data-modal-target="modal" data-modal-toggle="modal" class="bg-blue-500 py-2 px-4 text-xs rounded-lg text-white hover:bg-blue-600 shadow">+ Scrutin de liste</button>
-        <button data-modal-target="modal2" data-modal-toggle="modal2"><a href="#"  class="bg-blue-500 py-2 px-4 text-xs text-sm rounded-lg text-white hover:bg-blue-600 shadow">+ Vote simple</a></button>
-  
+        {% if not vote_simple_exist %}
+            <button data-modal-target="modal" data-modal-toggle="modal" class="bg-blue-500 py-2 px-4 text-xs rounded-lg text-white hover:bg-blue-600 shadow">+ Scrutin de liste</button>
+        {% endif %}
+        {% if not scrutin_exist %}
+            <button data-modal-target="modal2" data-modal-toggle="modal2"><a href="#"  class="bg-blue-500 py-2 px-4 text-xs text-sm rounded-lg text-white hover:bg-blue-600 shadow">+ Vote simple</a></button>
+        {% endif %}
+        <button data-modal-target="modal2" data-modal-toggle="modal2"><a href="#"  class="bg-blue-500 py-2 px-4 text-xs text-sm rounded-lg text-white hover:bg-blue-600 shadow"><a href="{% url 'page_vote' election.id %}">Voté</a></button>
         <!-- Main modal -->
         <div id="modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative w-full max-w-md max-h-full">
@@ -127,6 +131,7 @@
         <p class="text-right text-sm text-gray-500 my-2">{{election.date|date}} à {{e.date|time}}</p>
         </div>
     </div>
+    {% if scrutin_exist %}
     <div>
         <h5 class="font-semibold my-2">Liste</h5>
         <div class="border border-gray-200 rounded-lg divide divide-y-2">
@@ -135,6 +140,17 @@
             {% endfor %}
         </div>
     </div>
+    {% endif %}
+    {% if vote_simple_exist %}
+    <div>
+        <h5 class="font-semibold my-2">Liste vote</h5>
+        <div class="border border-gray-200 rounded-lg divide divide-y-2">
+            {% for v in vote_simple  reversed %}
+                <div class="p-2 text-sm"><a href="{% url 'vote_simple_detail' v.id %}">{{v.titre}}</a></div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 </div>
 
 {% endblock %}
