@@ -2,13 +2,22 @@
 {% block content %}
 <div class="max-w-2xl mx-auto">
     <div class="flex flex-row justify-between my-4">
-        {% if not vote_simple_exist %}
+        {% if election.type == 'Scrutin de liste' %}
             <button data-modal-target="modal" data-modal-toggle="modal" class="bg-blue-500 py-2 px-4 text-xs rounded-lg text-white hover:bg-blue-600 shadow">+ Scrutin de liste</button>
-        {% endif %}
-        {% if not scrutin_exist %}
+        {% else %}
             <button data-modal-target="modal2" data-modal-toggle="modal2"><a href="#"  class="bg-blue-500 py-2 px-4 text-xs text-sm rounded-lg text-white hover:bg-blue-600 shadow">+ Vote simple</a></button>
         {% endif %}
-        <button data-modal-target="modal2" data-modal-toggle="modal2"><a href="#"  class="bg-blue-500 py-2 px-4 text-xs text-sm rounded-lg text-white hover:bg-blue-600 shadow"><a href="{% url 'page_vote' election.id %}">Voté</a></button>
+            <div class="flex flex-row space-x-2">
+                {% if vote_simple_exist or scrutin_exist %}
+                    {% if election.published == False %}
+                        <button ><a href="{% url 'pub_election' election.id %}"  class="bg-blue-500 py-2 px-4 text-xs text-sm rounded-lg text-white hover:bg-blue-600 shadow">Publier</a></button>
+                    {% else%}
+                        <p>Publié</p>
+                    {% endif %}
+                {% endif %}
+                <button ><a href="{% url 'del_election' election.id %}"  class="bg-red-500 py-2 px-4 text-xs text-sm rounded-lg text-white hover:bg-red-600 shadow">Supprimer</a></button>
+            </div>
+        
         <!-- Main modal -->
         <div id="modal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative w-full max-w-md max-h-full">
@@ -95,7 +104,6 @@
     </div>
 <div class="bg-white p-4 rounded-lg shadow">
     <div class="flex flex-col">
-        <span class="bg-red-500 h-36"></span>
         <div class="p-2 text-sm">
             <h6 class="font-semibold text-lg"><a href="{% url 'election_detail' election.id %}">{{election.titre}}</a></h6>
             <p class="flex flex-row space-x-2 items-center">
@@ -128,10 +136,10 @@
             </span>
             <span class="text-gray-600">{{election.debut_election}} - {{election.fin_election}}</span>
         </p>
-        <p class="text-right text-sm text-gray-500 my-2">{{election.date|date}} à {{e.date|time}}</p>
+        <p class="text-right text-sm text-gray-500 my-2">{{election.date}}</p>
         </div>
     </div>
-    {% if scrutin_exist %}
+    {% if election.type == 'Scrutin de liste' %}
     <div>
         <h5 class="font-semibold my-2">Liste</h5>
         <div class="border border-gray-200 rounded-lg divide divide-y-2">
@@ -141,7 +149,7 @@
         </div>
     </div>
     {% endif %}
-    {% if vote_simple_exist %}
+    {% if election.type == 'Vote simple' %}
     <div>
         <h5 class="font-semibold my-2">Liste vote</h5>
         <div class="border border-gray-200 rounded-lg divide divide-y-2">

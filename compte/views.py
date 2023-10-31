@@ -59,7 +59,10 @@ def login_user(request):
                 )
                 if user is not None:
                     login(request, user)
-                    return redirect('home')
+                    if user.is_admin:
+                        return redirect('home')
+                    else:
+                        return redirect('page_electeur')
                 else:
                     message = 'Identifiants invalides'
     else:

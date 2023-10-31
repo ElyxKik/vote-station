@@ -3,7 +3,13 @@ from django.db.models.deletion import CASCADE
 
 from compte.models import User
 
-
+class Electeur(models.Model):
+    user = models.ForeignKey(User, on_delete=CASCADE)
+    prenom = models.CharField(max_length=50)
+    nom = models.CharField(max_length=50)
+    post_nom = models.CharField(max_length=50)
+    date = models.DateTimeField(auto_now=True)
+    
 
 class Election(models.Model):
 
@@ -11,14 +17,20 @@ class Election(models.Model):
         VOTE_A_BULLETIN_SECRET = 'Vote à bulletin sécret'
         VOTE_NON_ANONYME = 'Vote non anonyme'
 
+    class Type(models.TextChoices):
+        SCRUTIN_DE_LISTE = 'Scrutin de liste'
+        VOTE_SIMPLE = 'Vote simple'
+
     user = models.ForeignKey(User, on_delete=CASCADE)
     titre = models.CharField(max_length=100)
     groupe = models.CharField(max_length=100)
     systeme_de_vote = models.CharField(choices=SystemeVote.choices, default='Vote à bulletin sécret',max_length=100)
+    type = models.CharField(choices=Type.choices, default='Scrutin de liste', max_length=20)
     debut_election = models.DateTimeField()
     fin_election = models.DateTimeField()
     published = models.BooleanField(default=False)
     resultat = models.BooleanField(default=False)
+    electeur = models.ManyToManyField(Electeur, blank=True)
     date = models.DateTimeField(auto_now=True)
 
 
@@ -49,13 +61,6 @@ class Candidat(models.Model):
     email = models.EmailField()
     date = models.DateTimeField(auto_now=True)
 
-
-class Electeur(models.Model):
-    user = models.ForeignKey(User, on_delete=CASCADE)
-    prenom = models.CharField(max_length=50)
-    nom = models.CharField(max_length=50)
-    post_nom = models.CharField(max_length=50)
-    date = models.DateTimeField(auto_now=True)
 
 
 class VoixVoteScrutin(models.Model):

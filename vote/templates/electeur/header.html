@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Bonjour {{request.user}} !</title>
+	<meta name="author" content="name">
+  <meta name="description" content="description here">
+	<meta name="keywords" content="keywords,here">
+        <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"/>
+	<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet"> <!--Totally optional :) -->
+
+</head>
+<body class="bg-gray-50 font-sans leading-normal tracking-normal">
+
+	<nav class="flex items-center justify-between flex-wrap bg-blue-600 p-4 fixed w-full z-10 top-0">
+		<div class="flex items-center flex-shrink-0 text-white mr-6">
+			<a class="text-white no-underline hover:text-white hover:no-underline" href="#">
+				<span class="text-2xl pl-2 flex items-center">
+					<a href="{% url 'page_electeur' %}">
+						<img src="{% static 'logo2.png' %}" class="w-12 h-12 rounded-full mr-2 ">
+					</a>
+				</span>
+			</a>
+		</div>
+
+		<div class="block lg:hidden">
+			<button id="nav-toggle" class="flex items-center px-2 py-2 border rounded-full text-white border-white hover:text-white hover:border-white">
+				<svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+			</button>
+		</div>
+
+		<div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block pt-6 lg:pt-0" id="nav-content">
+			<ul class="list-reset lg:flex justify-end flex-1 items-center">
+				<li class="mr-3">
+					<a class="inline-block py-2 px-4 text-white no-underline" href="{% url 'logout' %}">Deconnection</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<!--Container-->
+	<div class="container mx-auto bg-gray-100 mt-24 md:mt-18 py-4 px-2">
+ 

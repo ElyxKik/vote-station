@@ -6,7 +6,7 @@ from vote.models import Election, Candidat, ScrutinList
 class ElectionForm(forms.ModelForm):
     class Meta:
         model = Election
-        fields = ('titre', 'groupe', 'systeme_de_vote', 'debut_election', 'fin_election' )
+        fields = ('titre', 'groupe', 'systeme_de_vote','type', 'debut_election', 'fin_election' )
 
 
 class CandidatForm(forms.ModelForm):

@@ -4,19 +4,19 @@
 <div class="py-4">
     <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
         <div class="flex flex-col bg-white p-4 rounded-lg text-right">
-            <span class="font-bold text-xl">0</span>
+            <span class="font-bold text-xl">{{nombre_elections}}</span>
             <span class="text-sm">Election</span>
         </div>
         <div class="flex flex-col bg-white p-4 rounded-lg text-right">
-            <span class="font-bold text-xl">0</span>
+            <span class="font-bold text-xl">{{nombre_candidats}}</span>
             <span class="text-sm">Candidat</span>
         </div>
         <div class="flex flex-col bg-white p-4 rounded-lg text-right">
-            <span class="font-bold text-xl">0</span>
+            <span class="font-bold text-xl">{{nombre_electeur}}</span>
             <span class="text-sm">Electeur</span>
         </div>
     </div>
-    <p>Bonjour, {{request.user}}
+    <p class="text-xl font-bold my-4">Bonjour, {{request.user}}
     <div class="my-8">
         <h3 class="font-semibold text-lg  my-4">Election en cours</h3>
         <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -50,6 +50,8 @@
                     <p class="text-right text-xs text-gray-400 my-2">{{e.date|date}} à {{e.date|time}}</p>
                 </div>
             </div>
+            {% empty %}
+                <p class="text-sm">Aucune éléction en cours...</p>
             {% endfor %}
     </div>
 </div>

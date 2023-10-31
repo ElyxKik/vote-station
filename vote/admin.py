@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from vote.models import Candidat, Election, Electeur
+from vote.models import *
 
 
 
@@ -13,3 +13,5 @@ class ElecteurAdmin(admin.ModelAdmin):
 admin.site.register(Candidat, CandidatAdmin)
 admin.site.register(Election)
 admin.site.register(Electeur, ElecteurAdmin)
+admin.site.register(VoixVoteSimple)
+admin.site.register(VoixVoteScrutin)
