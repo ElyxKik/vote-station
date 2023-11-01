@@ -27,6 +27,13 @@ def election(request):
     return render(request, 'elections.html', {'elections':elections, 'nombre_election':nombre_election, 'form':form, 'elections_passe':elections_passe})
 
 
+
+@admin_required
+def candidats(request):
+    candidats = Candidat.objects.all()
+    return render(request, 'candidats.html', {'candidats':candidats})
+
+
 @admin_required
 def election_detail(request, id):
     election = Election.objects.get(id=id)
